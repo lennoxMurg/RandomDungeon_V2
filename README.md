@@ -26,5 +26,6 @@ Das team aus  der I12-F2 des [Adolf-Kolping-Berufskollegs](https://www.akbk-horr
 
 - Lars
 
-- Lennox    - __Gruppenleiter__
-Und es heißt: __"Semicolon-Sheriffs"__
+- Lennox    - __Gruppenleiter__  
+
+  Und es heißt: __"Semicolon-Sheriffs"__
