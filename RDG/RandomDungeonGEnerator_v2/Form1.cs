@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RandomDungeonGEnerator_v2
 {
-    public partial class Form1 : Form
+    public partial class fom_Spiel : Form
     {
-        public Form1()
+        public fom_Spiel()
         {
             InitializeComponent();
         }
