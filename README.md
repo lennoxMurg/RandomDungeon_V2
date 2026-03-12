@@ -1,7 +1,7 @@
 # RandomDungeon_V2
 
 Das Random Dungeon Projekt, jetzt in WindowsForms.  
-Wie beim ersten [RAndom Dungeon Generator](https://github.com/lennoxMurg/RandomDungeonGenerator_RDG) wird ein Dungeon generiert
+Wie beim ersten [Random Dungeon Generator](https://github.com/lennoxMurg/RandomDungeonGenerator_RDG) wird ein Dungeon generiert
 
 ----
 
