@@ -81,7 +81,6 @@
             this.lbl_Score.Size = new System.Drawing.Size(35, 13);
             this.lbl_Score.TabIndex = 2;
             this.lbl_Score.Text = "Score";
-            this.lbl_Score.Click += new System.EventHandler(this.lbl_Score_Click);
             // 
             // btn_Hinzufuegen
             // 
@@ -91,6 +90,7 @@
             this.btn_Hinzufuegen.TabIndex = 0;
             this.btn_Hinzufuegen.Text = "Hinzufügen";
             this.btn_Hinzufuegen.UseVisualStyleBackColor = true;
+            this.btn_Hinzufuegen.Click += new System.EventHandler(this.btn_Hinzufuegen_Click);
             // 
             // txt_EingabeFeld
             // 
@@ -98,6 +98,7 @@
             this.txt_EingabeFeld.Name = "txt_EingabeFeld";
             this.txt_EingabeFeld.Size = new System.Drawing.Size(100, 20);
             this.txt_EingabeFeld.TabIndex = 3;
+            this.txt_EingabeFeld.TextChanged += new System.EventHandler(this.txt_EingabeFeld_TextChanged);
             // 
             // fom_Spiel
             // 

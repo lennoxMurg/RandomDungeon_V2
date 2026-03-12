@@ -15,6 +15,33 @@ namespace RandomDungeonGEnerator_v2
         public fom_Spiel()
         {
             InitializeComponent();
+            btn_Hinzufuegen.Enabled = false;
+        }
+
+        private void btn_Hinzufuegen_Click(object sender, EventArgs e)
+        {
+            
+            
+
+
+
+
+
+
+
+        }
+
+        private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
+        {
+            btn_Hinzufuegen.Enabled = true;
+            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) || txt_EingabeFeld.Text.Length > 3)
+            {
+                btn_Hinzufuegen.Enabled = false;
+            }
+            else
+            {
+                btn_Hinzufuegen.Enabled = true;
+            }
         }
     }
 }
