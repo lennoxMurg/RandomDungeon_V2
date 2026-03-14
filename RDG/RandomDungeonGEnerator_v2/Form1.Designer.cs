@@ -105,9 +105,10 @@
             // 
             // pbox_dungeon
             // 
-            this.pbox_dungeon.Location = new System.Drawing.Point(201, 56);
+            this.pbox_dungeon.Location = new System.Drawing.Point(200, 60);
             this.pbox_dungeon.Name = "pbox_dungeon";
             this.pbox_dungeon.Size = new System.Drawing.Size(320, 320);
+            this.pbox_dungeon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_dungeon.TabIndex = 4;
             this.pbox_dungeon.TabStop = false;
             // 
