@@ -12,8 +12,8 @@ Ein TODO in dem noch notwendige und mögliche dinge eingetragen werden
 
 - [ ] Die überprüfung der eingabe im code bei btn_Hinzufuegen ab-ändern
 
-- [ ] Alten Algorithmus einfügen  
-  [ ] Einen neuen Algorithmus verwenden (z.b Prims alogithm, Drunkards/Random Walk, etc..)
+- [ ] Alten Algorithmus einfügen
+- - [ ] Einen neuen Algorithmus verwenden (z.b Prims alogithm, Drunkards/Random Walk, etc..)
 
 ## Forms
 
@@ -31,7 +31,7 @@ Ein TODO in dem noch notwendige und mögliche dinge eingetragen werden
 - [ ] Sprites für die Dungeon Symbole erstellen (Nur bei PictureBox mit forms+)
 
 - [X] Aufgabenverteilung.md erstellen  
-  [ ] Aufgabenverteilung.md mit Aufgaben und der Verteilung füllen
+- - [ ] Aufgabenverteilung.md mit Aufgaben und der Verteilung füllen
 
 ----
 
