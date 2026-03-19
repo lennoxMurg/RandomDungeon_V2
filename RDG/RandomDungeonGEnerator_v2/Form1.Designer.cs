@@ -102,6 +102,7 @@
             this.txt_EingabeFeld.Size = new System.Drawing.Size(87, 20);
             this.txt_EingabeFeld.TabIndex = 3;
             this.txt_EingabeFeld.TextChanged += new System.EventHandler(this.txt_EingabeFeld_TextChanged);
+            this.txt_EingabeFeld.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_EingabeFeld_KeyPress);
             // 
             // pbox_dungeon
             // 

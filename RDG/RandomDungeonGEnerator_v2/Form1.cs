@@ -107,5 +107,14 @@ namespace RandomDungeonGEnerator_v2
         {
             ZeichneDungeon(pbox_dungeon);
         }
+
+        private void txt_EingabeFeld_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Erlaubt nur Zahlen und die Backspace-Taste 
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Blockiert die Eingabe
+            }
+        }
     }
 }
