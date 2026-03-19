@@ -66,6 +66,7 @@
             this.lbl_EingabeAufforderung.Size = new System.Drawing.Size(89, 13);
             this.lbl_EingabeAufforderung.TabIndex = 1;
             this.lbl_EingabeAufforderung.Text = "Bitte xy Eingeben";
+            this.lbl_EingabeAufforderung.Click += new System.EventHandler(this.lbl_EingabeAufforderung_Click);
             // 
             // lbl_Informationen
             // 
@@ -102,6 +103,7 @@
             this.txt_EingabeFeld.Size = new System.Drawing.Size(87, 20);
             this.txt_EingabeFeld.TabIndex = 3;
             this.txt_EingabeFeld.TextChanged += new System.EventHandler(this.txt_EingabeFeld_TextChanged);
+            this.txt_EingabeFeld.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_EingabeFeld_KeyPress);
             // 
             // pbox_dungeon
             // 
