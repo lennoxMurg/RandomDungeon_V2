@@ -66,6 +66,7 @@
             this.lbl_EingabeAufforderung.Size = new System.Drawing.Size(89, 13);
             this.lbl_EingabeAufforderung.TabIndex = 1;
             this.lbl_EingabeAufforderung.Text = "Bitte xy Eingeben";
+            this.lbl_EingabeAufforderung.Click += new System.EventHandler(this.lbl_EingabeAufforderung_Click);
             // 
             // lbl_Informationen
             // 
