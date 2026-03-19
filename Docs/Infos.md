@@ -31,6 +31,8 @@ Falls ihr Informationen zu dingen im PRojekt braucht findet ihr diese hier
 
 - Mehr über [Bitmaps](https://de.wikipedia.org/wiki/Windows_Bitmap)
 
+- https://www.netresize.net/#:~:text=Softgroup%20.Net%20Forms%20Resize%20is%20a%20fast%2C%20small,a%20.Net%20Windows%20Form%20as%20they%20are%20sized.
+
 ----
 
 - Mehr über mögliche Texturen und deren umsetzung in einem meiner anderen [Repos](https://github.com/lennoxMurg/Conways-Game-of-Life) zu Conways Spiel des Lebens
