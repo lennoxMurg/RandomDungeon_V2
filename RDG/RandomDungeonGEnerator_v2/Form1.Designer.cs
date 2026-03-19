@@ -41,6 +41,8 @@
             // 
             // btn_Generieren
             // 
+            this.btn_Generieren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Generieren.AutoSize = true;
             this.btn_Generieren.Location = new System.Drawing.Point(13, 277);
             this.btn_Generieren.Name = "btn_Generieren";
             this.btn_Generieren.Size = new System.Drawing.Size(86, 32);
@@ -51,6 +53,7 @@
             // 
             // btn_Einstellungen
             // 
+            this.btn_Einstellungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_Einstellungen.Location = new System.Drawing.Point(13, 354);
             this.btn_Einstellungen.Name = "btn_Einstellungen";
             this.btn_Einstellungen.Size = new System.Drawing.Size(86, 28);
@@ -108,7 +111,7 @@
             this.pbox_dungeon.Location = new System.Drawing.Point(200, 60);
             this.pbox_dungeon.Name = "pbox_dungeon";
             this.pbox_dungeon.Size = new System.Drawing.Size(320, 320);
-            this.pbox_dungeon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_dungeon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbox_dungeon.TabIndex = 4;
             this.pbox_dungeon.TabStop = false;
             // 
@@ -116,6 +119,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(548, 394);
             this.Controls.Add(this.pbox_dungeon);
             this.Controls.Add(this.txt_EingabeFeld);
