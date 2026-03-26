@@ -117,5 +117,10 @@ namespace RandomDungeonGEnerator_v2
                 lbl_Score.Visible = !lbl_Score.Visible;
             }
         }
+
+        private void btn_Einstellungen_Click(object sender, EventArgs e)
+        {
+            lstbox_Einstellungen.Visible = !lstbox_Einstellungen.Visible;
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.btn_Hinzufuegen = new System.Windows.Forms.Button();
             this.txt_EingabeFeld = new System.Windows.Forms.TextBox();
             this.pbox_dungeon = new System.Windows.Forms.PictureBox();
+            this.lstbox_Einstellungen = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_dungeon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +61,7 @@
             this.btn_Einstellungen.TabIndex = 0;
             this.btn_Einstellungen.Text = "Einstellungen";
             this.btn_Einstellungen.UseVisualStyleBackColor = true;
+            this.btn_Einstellungen.Click += new System.EventHandler(this.btn_Einstellungen_Click);
             // 
             // lbl_EingabeAufforderung
             // 
@@ -117,6 +119,30 @@
             this.pbox_dungeon.TabIndex = 4;
             this.pbox_dungeon.TabStop = false;
             // 
+            // lstbox_Einstellungen
+            // 
+            this.lstbox_Einstellungen.AccessibleName = "";
+            this.lstbox_Einstellungen.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lstbox_Einstellungen.FormattingEnabled = true;
+            this.lstbox_Einstellungen.HorizontalScrollbar = true;
+            this.lstbox_Einstellungen.Items.AddRange(new object[] {
+            "Einstellungen",
+            "Option1",
+            "Option2",
+            "Option3",
+            "Option4",
+            "Option5",
+            "Option6",
+            "Option7",
+            "Option8",
+            "Option9",
+            "Option10"});
+            this.lstbox_Einstellungen.Location = new System.Drawing.Point(12, 132);
+            this.lstbox_Einstellungen.Name = "lstbox_Einstellungen";
+            this.lstbox_Einstellungen.Size = new System.Drawing.Size(111, 139);
+            this.lstbox_Einstellungen.TabIndex = 7;
+            this.lstbox_Einstellungen.Visible = false;
+            // 
             // fom_Spiel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +150,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(548, 394);
+            this.Controls.Add(this.lstbox_Einstellungen);
             this.Controls.Add(this.pbox_dungeon);
             this.Controls.Add(this.txt_EingabeFeld);
             this.Controls.Add(this.lbl_Score);
@@ -150,6 +177,7 @@
         private System.Windows.Forms.Button btn_Hinzufuegen;
         private System.Windows.Forms.TextBox txt_EingabeFeld;
         private System.Windows.Forms.PictureBox pbox_dungeon;
+        private System.Windows.Forms.CheckedListBox lstbox_Einstellungen;
     }
 }
 
