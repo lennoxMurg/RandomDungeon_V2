@@ -78,6 +78,7 @@
             this.lbl_Informationen.Size = new System.Drawing.Size(71, 13);
             this.lbl_Informationen.TabIndex = 2;
             this.lbl_Informationen.Text = "Informationen";
+            this.lbl_Informationen.Visible = false;
             // 
             // lbl_Score
             // 
@@ -87,6 +88,7 @@
             this.lbl_Score.Size = new System.Drawing.Size(35, 13);
             this.lbl_Score.TabIndex = 2;
             this.lbl_Score.Text = "Score";
+            this.lbl_Score.Visible = false;
             // 
             // btn_Hinzufuegen
             // 

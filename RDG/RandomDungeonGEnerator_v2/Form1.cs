@@ -107,6 +107,15 @@ namespace RandomDungeonGEnerator_v2
         {
             ZeichneDungeon(pbox_dungeon);
 
+            if (lbl_Informationen.Visible == false)
+            {
+                lbl_Informationen.Visible = !lbl_Informationen.Visible;
+            }
+
+            if (lbl_Score.Visible == false)
+            {
+                lbl_Score.Visible = !lbl_Score.Visible;
+            }
         }
     }
 }
