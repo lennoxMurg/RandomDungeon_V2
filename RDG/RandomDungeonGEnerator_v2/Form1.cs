@@ -15,6 +15,7 @@ namespace RandomDungeonGEnerator_v2
         //Variablen wleche im ganzen Projekt gebraucht werden
         static int dungeon_breite;
         static int dungeon_hoehe;
+        static bool breiteEingegeben = false;
 
         static char[,] dungeon;
 
@@ -39,7 +40,33 @@ namespace RandomDungeonGEnerator_v2
 
         private void btn_Hinzufuegen_Click(object sender, EventArgs e)
         {
+            // Die Zahl aus dem Textfeld sicher umwandeln
+            if (int.TryParse(txt_EingabeFeld.Text, out int wert))
+            {
+                if (!breiteEingegeben)
+                {
+                    // Breite speichern
+                    dungeon_breite = wert;
+                    breiteEingegeben = true;
 
+                    // UI Feedback 
+                    lbl_EingabeAufforderung.Text = "Breite gesetzt: " + wert + ". Jetzt Höhe eingeben:";
+                }
+                else
+                {
+                    // Höhe speichern
+                    dungeon_hoehe = wert;
+                    breiteEingegeben = false; // reset
+
+                    lbl_EingabeAufforderung.Text = "Höhe gesetzt: " + wert + ". Dungeon bereit!";
+
+                   
+                }
+
+                // Textfeld leeren
+                txt_EingabeFeld.Clear();
+                txt_EingabeFeld.Focus(); 
+            }
         }
 
         private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
@@ -121,6 +148,22 @@ namespace RandomDungeonGEnerator_v2
         private void btn_Einstellungen_Click(object sender, EventArgs e)
         {
             lstbox_Einstellungen.Visible = !lstbox_Einstellungen.Visible;
+        }
+
+        private void txt_EingabeFeld_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Erlaubt nur Zahlen und die Backspace-Taste 
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Blockiert die Eingabe
+            }
+        }
+
+        
+
+        private void lbl_EingabeAufforderung_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
