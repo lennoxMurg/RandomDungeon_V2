@@ -132,6 +132,8 @@
             this.Controls.Add(this.btn_Generieren);
             this.Name = "fom_Spiel";
             this.Text = "Random Dungeon Generator";
+            this.Load += new System.EventHandler(this.fom_Spiel_Load);
+            this.Resize += new System.EventHandler(this.fom_Spiel_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_dungeon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

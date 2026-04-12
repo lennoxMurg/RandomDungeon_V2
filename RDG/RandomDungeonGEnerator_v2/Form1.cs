@@ -54,6 +54,14 @@ namespace RandomDungeonGEnerator_v2
             }
         }
 
+        private void btn_Generieren_Click(object sender, EventArgs e)
+        {
+            ZeichneDungeon(pbox_dungeon);
+
+        }
+
+        //-------------------------------------------------------------Methoden-------------------------------------------------------------//
+
         static void TestDungeon()
         {
             dungeon_breite = 5;
@@ -82,17 +90,17 @@ namespace RandomDungeonGEnerator_v2
                 {
                     Color farbe;
 
-                    switch (dungeon[y, x])
+                    switch (dungeon[y, x])  //TODO: Tausche diese Veränderung zu Farben, mit Sprites aus
                     {
-                        case '#': 
+                        case '#':
                             farbe = Color.DarkGray; break;
-                        case '.': 
+                        case '.':
                             farbe = Color.SaddleBrown; break;
-                        case 'S': 
+                        case 'S':
                             farbe = Color.Green; break;
-                        case 'E': 
+                        case 'E':
                             farbe = Color.Red; break;
-                        default: 
+                        default:
                             farbe = Color.Black; break;
                     }
 
@@ -103,10 +111,25 @@ namespace RandomDungeonGEnerator_v2
             pbox.Image = bmp_dungeon;
         }
 
-        private void btn_Generieren_Click(object sender, EventArgs e)
+        private void fom_Spiel_Resize(object sender, EventArgs e)
         {
-            ZeichneDungeon(pbox_dungeon);
+            int leftColumnWidth = 150;
+            int margin = 10;
 
+            int pbX = leftColumnWidth + margin;
+            int pbY = 40;
+            int pbWidth = this.ClientSize.Width - pbX - margin;
+            int pbHeight = this.ClientSize.Height - pbY - margin;
+
+            pbox_dungeon.SetBounds(pbX, pbY, pbWidth, pbHeight);
+
+            lbl_Informationen.Location = new System.Drawing.Point(pbX + pbWidth / 2, margin);
+            lbl_Score.Location = new System.Drawing.Point(pbX + pbWidth - 60, margin);
+        }
+
+        private void fom_Spiel_Load(object sender, EventArgs e)
+        {
+            fom_Spiel_Resize(sender, e);
         }
     }
 }
