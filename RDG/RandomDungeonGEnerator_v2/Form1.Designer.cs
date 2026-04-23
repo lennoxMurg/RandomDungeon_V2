@@ -61,7 +61,6 @@
             this.btn_Einstellungen.TabIndex = 0;
             this.btn_Einstellungen.Text = "Einstellungen";
             this.btn_Einstellungen.UseVisualStyleBackColor = true;
-            this.btn_Einstellungen.Click += new System.EventHandler(this.btn_Einstellungen_Click);
             // 
             // lbl_EingabeAufforderung
             // 

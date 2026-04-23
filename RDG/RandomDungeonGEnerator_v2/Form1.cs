@@ -44,7 +44,10 @@ namespace RandomDungeonGEnerator_v2
 
         private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) || txt_EingabeFeld.Text.Length > 3)
+            // Abfangen von falschen Eingaben wie Buchstaben oder Sonderzeichen
+            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) ||
+                txt_EingabeFeld.Text.Length > 3 ||
+                !int.TryParse(txt_EingabeFeld.Text, out _))
             {
                 btn_Hinzufuegen.Enabled = false;
             }
