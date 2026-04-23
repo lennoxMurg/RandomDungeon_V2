@@ -61,7 +61,6 @@
             this.btn_Einstellungen.TabIndex = 0;
             this.btn_Einstellungen.Text = "Einstellungen";
             this.btn_Einstellungen.UseVisualStyleBackColor = true;
-            this.btn_Einstellungen.Click += new System.EventHandler(this.btn_Einstellungen_Click);
             // 
             // lbl_EingabeAufforderung
             // 
@@ -94,7 +93,7 @@
             // 
             // btn_Hinzufuegen
             // 
-            this.btn_Hinzufuegen.Location = new System.Drawing.Point(12, 102);
+            this.btn_Hinzufuegen.Location = new System.Drawing.Point(12, 82);
             this.btn_Hinzufuegen.Name = "btn_Hinzufuegen";
             this.btn_Hinzufuegen.Size = new System.Drawing.Size(87, 23);
             this.btn_Hinzufuegen.TabIndex = 0;

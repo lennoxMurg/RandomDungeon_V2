@@ -13,8 +13,8 @@ namespace RandomDungeonGEnerator_v2
     public partial class fom_Spiel : Form
     {
         //Variablen wleche im ganzen Projekt gebraucht werden
-        static int dungeon_breite;
-        static int dungeon_hoehe;
+        static int dungeon_breite = 0;
+        static int dungeon_hoehe = 0;
 
         static char[,] dungeon;
 
@@ -39,7 +39,14 @@ namespace RandomDungeonGEnerator_v2
 
         private void btn_Hinzufuegen_Click(object sender, EventArgs e)
         {
-
+            if (dungeon_breite == 0)
+            {
+                dungeon_breite = Convert.ToInt32(txt_EingabeFeld.Text);
+            }
+            else
+            {
+                dungeon_hoehe = Convert.ToInt32(txt_EingabeFeld.Text);
+            }
         }
 
         private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
@@ -76,6 +83,11 @@ namespace RandomDungeonGEnerator_v2
                 { '#', '.', '.', 'E', '#' },
                 { '#', '#', '#', '#', '#' }
             };
+        }
+
+        static void DungeonGenerierung()
+        {
+
         }
 
         static void ZeichneDungeon(PictureBox pbox)
