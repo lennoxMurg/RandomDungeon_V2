@@ -146,5 +146,10 @@ namespace RandomDungeonGEnerator_v2
         {
             fom_Spiel_Resize(sender, e);
         }
+
+        private void btn_Einstellungen_Click(object sender, EventArgs e)
+        {
+            lstbox_Einstellungen.Visible = !lstbox_Einstellungen.Visible;
+        }
     }
 }
