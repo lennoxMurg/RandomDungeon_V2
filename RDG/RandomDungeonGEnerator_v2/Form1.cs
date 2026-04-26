@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace RandomDungeonGEnerator_v2
@@ -12,18 +11,13 @@ namespace RandomDungeonGEnerator_v2
         static int breite = 0;
         static int hoehe = 0;
 
-        const int max_groesse = 40; //Gilt für sowohl Breite als auch höhe
-
         static char[,] dungeon;
 
         static Random rng;
 
-        //Sprites & Texturen
-        static char[] tile_arten;
-        static Image[] tile_sprites;
-
         //Sonstiges & einstellungen
-        static int tile_groesse = 16;
+        static int tile_groesse = 16; //Wird benötigt, wenn wir Sprites über einer GRöße von 16x16 nehmen, da sonst die Skalierung zu problemen führt.
+                                      //Laut einer KI welche mir die PictureBox erklärte, kann die PictureBox sonst das Bild Ziehen oder Schrumpfen
 
 
         //-------------------------------------------------------------Events-------------------------------------------------------------//
@@ -33,6 +27,7 @@ namespace RandomDungeonGEnerator_v2
         {
             InitializeComponent();
             btn_Hinzufuegen.Enabled = false;
+            lbl_Informationen.Text = "Höhe bträgt " + hoehe + " | Breite bträgt " + breite;
         }
 
 
@@ -54,19 +49,18 @@ namespace RandomDungeonGEnerator_v2
             }
             else
             {
-                MessageBox.Show("Fehler! Diese Eingabe ist nicht Gültig!\n\nDie Eingabe muss mindestens 15 betragen und darf maximal 100 betragen", 
+                MessageBox.Show("Fehler! Diese Eingabe ist nicht Gültig!\n\nDie Eingabe muss mindestens 15 betragen und darf maximal 100 betragen",
                                 "Ungültige Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
 
+            lbl_Informationen.Text = "Höhe bträgt " + hoehe + " | Breite bträgt " + breite;
         }
 
 
         private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
         {
             // Abfangen von falschen Eingaben wie Buchstaben oder Sonderzeichen
-            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) ||
-                txt_EingabeFeld.Text.Length > 3 ||
-                !int.TryParse(txt_EingabeFeld.Text, out _))
+            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) || txt_EingabeFeld.Text.Length > 3 || !int.TryParse(txt_EingabeFeld.Text, out _))
             {
                 btn_Hinzufuegen.Enabled = false;
             }
@@ -103,14 +97,8 @@ namespace RandomDungeonGEnerator_v2
             pbox_dungeon.SetBounds(pbX, pbY, pbWidth, pbHeight);
 
             lbl_Informationen.Location = new System.Drawing.Point(pbX + pbWidth / 2, margin);
-            lbl_Score.Location = new System.Drawing.Point(pbX + pbWidth - 60, margin);
         }
 
-
-        private void btn_Einstellungen_Click(object sender, EventArgs e)
-        {
-            lstbox_Einstellungen.Visible = !lstbox_Einstellungen.Visible;
-        }
 
         //-------------------------------------------------------------Methoden-------------------------------------------------------------//
 
@@ -119,18 +107,17 @@ namespace RandomDungeonGEnerator_v2
         {
             bool istKorrekt = true;
 
-            if (eingabe <= 15)
+            if (eingabe < 15)
             {
                 istKorrekt = false;
             }
-            else if (eingabe >= 100)
+            else if (eingabe > 100)
             {
                 istKorrekt = false;
             }
 
             return istKorrekt;
         }
-
 
 
         static void DungeonGenerierung()
@@ -140,13 +127,17 @@ namespace RandomDungeonGEnerator_v2
 
             // 1. Alles als Wand initialisieren
             for (int y = 0; y < hoehe; y++)
+            {
                 for (int x = 0; x < breite; x++)
+                {
                     dungeon[y, x] = '#';
+                }
+            }
 
             // 2. Räume erzeugen
             List<(int x, int y, int b, int h)> raeume = new List<(int, int, int, int)>();
 
-            int raumAnzahl = Math.Max(1, (breite * hoehe) / 1000);
+            int raumAnzahl = Math.Max(1, (breite * hoehe) / 100);
 
             for (int i = 0; i < raumAnzahl; i++)
             {
@@ -234,7 +225,6 @@ namespace RandomDungeonGEnerator_v2
             dungeon[s.y, s.x] = 'S';
             dungeon[e.y, e.x] = 'E';
         }
-
 
         static void ZeichneDungeon(PictureBox pbox)
         {
