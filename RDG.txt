@@ -1,0 +1,400 @@
+namespace RandomDungeonGEnerator_v2
+{
+    public partial class fom_Spiel : Form
+    {
+        // Dungeon
+        static int dungeon_breite = 21;
+        static int dungeon_hoehe = 21;
+        static char[,] dungeon;
+        static Random rng = new Random();
+
+        // Symbole
+        const char WAND_SYMBOL = '#';
+        const char WEG_SYMBOL = '.';
+        const char START_SYMBOL = 'S';
+        const char END_SYMBOL = 'E';
+
+        const int START_END_ABSTAND = 6;
+
+        static int tile_groesse = 16;
+
+        public fom_Spiel()
+        {
+            InitializeComponent();
+        }
+
+
+        // ---------------- BUTTON ----------------
+
+        private void btn_Generieren_Click(object sender, EventArgs e)
+        {
+
+            DungeonGenerierung();
+            ZeichneDungeon(pbox_dungeon);
+        }
+
+        // ---------------- GENERIERUNG ----------------
+
+        static void DungeonGenerierung()
+        {
+            dungeon = new char[dungeon_hoehe, dungeon_breite];
+
+            InitialisiereDungeon(dungeon);
+
+            var pos = PlatziereStartUndEnde(dungeon, rng, dungeon_breite, dungeon_hoehe);
+
+            Dungeongenerierung_v3(
+                dungeon,
+                pos.startZeile,
+                pos.startSpalte,
+                pos.endeZeile,
+                pos.endeSpalte,
+                rng
+            );
+        }
+
+        static void InitialisiereDungeon(char[,] feld)
+        {
+            for (int y = 0; y < feld.GetLength(0); y++)
+            {
+                for (int x = 0; x < feld.GetLength(1); x++)
+                {
+                    feld[y, x] = WAND_SYMBOL;
+                }
+            }
+        }
+
+        static (int startZeile, int startSpalte, int endeZeile, int endeSpalte)
+        PlatziereStartUndEnde(char[,] feld, Random rnd, int breite, int hoehe)
+        {
+            int sz, sx, ez, ex;
+
+            sz = rnd.Next(1, hoehe - 1);
+            sx = rnd.Next(1, breite - 1);
+
+            do
+            {
+                ez = rnd.Next(1, hoehe - 1);
+                ex = rnd.Next(1, breite - 1);
+            }
+            while (Math.Abs(ez - sz) + Math.Abs(ex - sx) < START_END_ABSTAND);
+
+            return (sz, sx, ez, ex);
+        }
+
+        static void Dungeongenerierung_v3(char[,] feld, int startZ, int startX, int endZ, int endX, Random rnd)
+        {
+            int hoehe = feld.GetLength(0);
+            int breite = feld.GetLength(1);
+
+            int y = (startZ % 2 == 0) ? startZ + 1 : startZ;
+            int x = (startX % 2 == 0) ? startX + 1 : startX;
+
+            if (y <= 0 || y >= hoehe - 1) y = 1;
+            if (x <= 0 || x >= breite - 1) x = 1;
+
+            feld[y, x] = WEG_SYMBOL;
+
+            int[] dy = { 0, 0, 2, -2 };
+            int[] dx = { 2, -2, 0, 0 };
+
+            void DFS(int cy, int cx)
+            {
+                List<int> dirs = new List<int> { 0, 1, 2, 3 };
+
+                for (int i = 0; i < dirs.Count; i++)
+                {
+                    int swap = rnd.Next(i, dirs.Count);
+                    (dirs[i], dirs[swap]) = (dirs[swap], dirs[i]);
+                }
+
+                foreach (int d in dirs)
+                {
+                    int ny = cy + dy[d];
+                    int nx = cx + dx[d];
+
+                    if (ny > 0 && ny < hoehe - 1 &&
+                        nx > 0 && nx < breite - 1 &&
+                        feld[ny, nx] == WAND_SYMBOL)
+                    {
+                        feld[cy + dy[d] / 2, cx + dx[d] / 2] = WEG_SYMBOL;
+                        feld[ny, nx] = WEG_SYMBOL;
+
+                        DFS(ny, nx);
+                    }
+                }
+            }
+
+            DFS(y, x);
+
+            feld[startZ, startX] = START_SYMBOL;
+            feld[endZ, endX] = END_SYMBOL;
+        }
+
+        // ---------------- ZEICHNEN ----------------
+
+        static void ZeichneDungeon(PictureBox pbox)
+        {
+            Bitmap bmp = new Bitmap(dungeon_breite * tile_groesse, dungeon_hoehe * tile_groesse);
+            Graphics g = Graphics.FromImage(bmp);
+
+            for (int y = 0; y < dungeon_hoehe; y++)
+            {
+                for (int x = 0; x < dungeon_breite; x++)
+                {
+                    Color c;
+
+                    switch (dungeon[y, x])
+                    {
+                        case WAND_SYMBOL: c = Color.DarkGray; break;
+                        case WEG_SYMBOL: c = Color.SaddleBrown; break;
+                        case START_SYMBOL: c = Color.Green; break;
+                        case END_SYMBOL: c = Color.Red; break;
+                        default: c = Color.Black; break;
+                    }
+
+                    g.FillRectangle(new SolidBrush(c),
+                        x * tile_groesse,
+                        y * tile_groesse,
+                        tile_groesse,
+                        tile_groesse);
+                }
+            }
+
+            pbox.Image = bmp;
+        }
+    }
+}
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace RandomDungeonGEnerator_v2
+{
+    public partial class fom_Spiel : Form
+    {
+        static int dungeon_breite = 0;
+        static int dungeon_hoehe = 0;
+
+        static char[,] dungeon;
+        static Random rng = new Random();
+
+        // Symbole
+        const char WAND_SYMBOL = '#';
+        const char WEG_SYMBOL = '.';
+        const char START_SYMBOL = 'S';
+        const char END_SYMBOL = 'E';
+        const int START_END_ABSTAND = 6;
+
+        static int tile_groesse = 16;
+
+        public fom_Spiel()
+        {
+            InitializeComponent();
+            btn_Hinzufuegen.Enabled = false;
+        }
+
+        private void btn_Hinzufuegen_Click(object sender, EventArgs e)
+        {
+            if (dungeon_breite == 0)
+            {
+                dungeon_breite = Convert.ToInt32(txt_EingabeFeld.Text);
+                txt_EingabeFeld.Clear();
+            }
+            else
+            {
+                dungeon_hoehe = Convert.ToInt32(txt_EingabeFeld.Text);
+                txt_EingabeFeld.Clear();
+            }
+        }
+
+        private void txt_EingabeFeld_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_EingabeFeld.Text) ||
+                txt_EingabeFeld.Text.Length > 3 ||
+                !int.TryParse(txt_EingabeFeld.Text, out _))
+            {
+                btn_Hinzufuegen.Enabled = false;
+            }
+            else
+            {
+                btn_Hinzufuegen.Enabled = true;
+            }
+        }
+
+        private void btn_Generieren_Click(object sender, EventArgs e)
+        {
+            if (dungeon_breite < 5 || dungeon_hoehe < 5)
+            {
+                MessageBox.Show("Bitte gültige Breite und Höhe eingeben!");
+                return;
+            }
+
+            DungeonGenerierung();
+            ZeichneDungeon(pbox_dungeon);
+        }
+
+        //-------------------------------------------------------------Methoden-------------------------------------------------------------//
+
+        static void DungeonGenerierung()
+        {
+            dungeon = new char[dungeon_hoehe, dungeon_breite];
+
+            InitialisiereDungeon(dungeon);
+
+            var pos = PlatziereStartUndEnde(dungeon, rng, dungeon_breite, dungeon_hoehe);
+
+            Dungeongenerierung_v3(
+                dungeon,
+                pos.startZeile,
+                pos.startSpalte,
+                pos.endeZeile,
+                pos.endeSpalte,
+                rng
+            );
+        }
+
+        static void InitialisiereDungeon(char[,] feld)
+        {
+            for (int y = 0; y < feld.GetLength(0); y++)
+            {
+                for (int x = 0; x < feld.GetLength(1); x++)
+                {
+                    feld[y, x] = WAND_SYMBOL;
+                }
+            }
+        }
+
+        static (int startZeile, int startSpalte, int endeZeile, int endeSpalte)
+        PlatziereStartUndEnde(char[,] feld, Random rnd, int breite, int hoehe)
+        {
+            int sz, sx, ez, ex;
+
+            sz = rnd.Next(1, hoehe - 1);
+            sx = rnd.Next(1, breite - 1);
+
+            do
+            {
+                ez = rnd.Next(1, hoehe - 1);
+                ex = rnd.Next(1, breite - 1);
+            }
+            while (Math.Abs(ez - sz) + Math.Abs(ex - sx) < START_END_ABSTAND);
+
+            return (sz, sx, ez, ex);
+        }
+
+        static void Dungeongenerierung_v3(char[,] feld, int startZ, int startX, int endZ, int endX, Random rnd)
+        {
+            int hoehe = feld.GetLength(0);
+            int breite = feld.GetLength(1);
+
+            int y = (startZ % 2 == 0) ? startZ + 1 : startZ;
+            int x = (startX % 2 == 0) ? startX + 1 : startX;
+
+            if (y <= 0 || y >= hoehe - 1) y = 1;
+            if (x <= 0 || x >= breite - 1) x = 1;
+
+            feld[y, x] = WEG_SYMBOL;
+
+            int[] dy = { 0, 0, 2, -2 };
+            int[] dx = { 2, -2, 0, 0 };
+
+            void DFS(int cy, int cx)
+            {
+                List<int> dirs = new List<int> { 0, 1, 2, 3 };
+
+                for (int i = 0; i < dirs.Count; i++)
+                {
+                    int swap = rnd.Next(i, dirs.Count);
+                    (dirs[i], dirs[swap]) = (dirs[swap], dirs[i]);
+                }
+
+                foreach (int d in dirs)
+                {
+                    int ny = cy + dy[d];
+                    int nx = cx + dx[d];
+
+                    if (ny > 0 && ny < hoehe - 1 &&
+                        nx > 0 && nx < breite - 1 &&
+                        feld[ny, nx] == WAND_SYMBOL)
+                    {
+                        feld[cy + dy[d] / 2, cx + dx[d] / 2] = WEG_SYMBOL;
+                        feld[ny, nx] = WEG_SYMBOL;
+
+                        DFS(ny, nx);
+                    }
+                }
+            }
+
+            DFS(y, x);
+
+            feld[startZ, startX] = START_SYMBOL;
+            feld[endZ, endX] = END_SYMBOL;
+        }
+
+        static void ZeichneDungeon(PictureBox pbox)
+        {
+            Bitmap bmp_dungeon = new Bitmap(dungeon_breite * tile_groesse, dungeon_hoehe * tile_groesse);
+            Graphics g = Graphics.FromImage(bmp_dungeon);
+
+            for (int y = 0; y < dungeon_hoehe; y++)
+            {
+                for (int x = 0; x < dungeon_breite; x++)
+                {
+                    Color farbe;
+
+                    switch (dungeon[y, x])
+                    {
+                        case WAND_SYMBOL: farbe = Color.DarkGray; break;
+                        case WEG_SYMBOL: farbe = Color.SaddleBrown; break;
+                        case START_SYMBOL: farbe = Color.Green; break;
+                        case END_SYMBOL: farbe = Color.Red; break;
+                        default: farbe = Color.Black; break;
+                    }
+
+                    g.FillRectangle(new SolidBrush(farbe),
+                        x * tile_groesse,
+                        y * tile_groesse,
+                        tile_groesse,
+                        tile_groesse);
+                }
+            }
+
+            pbox.Image = bmp_dungeon;
+        }
+
+        private void fom_Spiel_Resize(object sender, EventArgs e)
+        {
+            int leftColumnWidth = 150;
+            int margin = 10;
+
+            int pbX = leftColumnWidth + margin;
+            int pbY = 40;
+            int pbWidth = this.ClientSize.Width - pbX - margin;
+            int pbHeight = this.ClientSize.Height - pbY - margin;
+
+            pbox_dungeon.SetBounds(pbX, pbY, pbWidth, pbHeight);
+
+            lbl_Informationen.Location = new Point(pbX + pbWidth / 2, margin);
+            lbl_Score.Location = new Point(pbX + pbWidth - 60, margin);
+        }
+
+        private void fom_Spiel_Load(object sender, EventArgs e)
+        {
+            fom_Spiel_Resize(sender, e);
+        }
+
+        private void btn_Einstellungen_Click(object sender, EventArgs e)
+        {
+            lstbox_Einstellungen.Visible = !lstbox_Einstellungen.Visible;
+        }
+    }
+}
